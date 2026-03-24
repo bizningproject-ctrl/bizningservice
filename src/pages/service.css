@@ -185,6 +185,56 @@
 .empty-state h3 { font-family: var(--font-display); font-size: 1.5rem; color: var(--navy); margin-bottom: 0.5rem; }
 .empty-state p { color: var(--slate); font-weight: 300; }
 
+/* ── PAGINATION ── */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0 3rem 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page-btn {
+  background: var(--white);
+  border: 1.5px solid rgba(27, 46, 74, 0.1);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--navy-light);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out-expo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-btn:hover:not([disabled]) {
+  background: var(--navy);
+  color: var(--white);
+  border-color: var(--navy);
+}
+
+.page-btn.active {
+  background: var(--blue);
+  color: var(--white);
+  border-color: var(--blue);
+  font-weight: 700;
+}
+
+.page-btn[disabled] {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.page-btn.page-nav {
+  font-size: 1rem;
+}
+
 @media (max-width: 768px) {
   .page-header { padding: 2rem 1.5rem 1.5rem; }
   .filters { padding: 0 1.5rem 1.5rem; }
