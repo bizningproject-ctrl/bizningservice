@@ -1,65 +1,70 @@
 # Handly — Find Trusted Home Pros
 
-A static front-end prototype for a home services marketplace that connects homeowners with verified local professionals.
+A home services marketplace built with **Vite** and vanilla JavaScript.
 
-## Overview
+## Project Structure
 
-Handly allows homeowners to browse, filter, and book trusted professionals for household tasks — plumbing, electrical work, cleaning, painting, HVAC, and general handyman services. Pricing is transparent, reviews are real, and satisfaction is guaranteed.
+```
+├── index.html              # Entry point (home page)
+├── service.html            # Entry point (service listing page)
+├── vite.config.js
+├── package.json
+└── src/
+    ├── main.js             # App entry — bootstraps router
+    ├── style.css           # Global CSS (variables, resets, animations)
+    ├── router.js           # Client-side SPA router
+    ├── data/
+    │   └── services.js     # All service categories, pros, testimonials data
+    ├── components/
+    │   ├── navbar.js       # Navbar component (home & service variants)
+    │   ├── navbar.css
+    │   ├── footer.js       # Footer component
+    │   └── footer.css
+    └── pages/
+        ├── home.js         # Landing page (Hero, Services, Steps, Pros, Testimonials, CTA)
+        ├── home.css
+        ├── service.js      # Professionals listing page (filters, sort, cards)
+        └── service.css
+```
 
 ## Pages
 
-### `index.html` — Landing Page
+### `/` — Landing Page
+- Hero with animated pro profile cards and search
+- 6 service categories
+- "How It Works" 3-step process (dark section)
+- 4 featured professionals
+- Customer testimonials
+- CTA section + Footer
 
-The main marketing page with the following sections:
+### `/service?type=<category>` — Professionals Listing
+Filter and sort verified professionals by service type.
 
-- **Hero** — Search bar, quick-select service tags, and sample pro profile cards
-- **Services** — Six service categories with available pro counts
-- **How It Works** — Three-step booking process (Describe → Get Matched → Book & Relax)
-- **Featured Professionals** — Four top-rated pros across different categories
-- **Testimonials** — Three customer reviews
-- **CTA** — Calls to action for homeowners and new professionals
-- **Footer** — Links to services, company info, and support
+| `type` param  | Category      | Pros |
+|---------------|---------------|------|
+| `plumbing`    | Plumbing      | 8    |
+| `electrical`  | Electrical    | 6    |
+| `cleaning`    | Home Cleaning | 6    |
+| `painting`    | Painting      | 5    |
+| `hvac`        | HVAC          | 5    |
+| `handyman`    | Handyman      | 6    |
 
-### `service.html` — Professionals Listing Page
-
-A dynamic listing page driven by a URL query parameter (`?type=<service>`). Displays all professionals for the selected category with:
-
-- **Filter buttons** — All / Top Rated / Verified Only / Available Now
-- **Sort dropdown** — By Rating, Price (low/high), Most Jobs
-- **Pro cards** — Avatar, name, verified badge, specialty, skill tags, rating, job count, hourly rate, and Book Now button
-
-## Supported Service Types
-
-| URL Parameter | Category      | Pros Available |
-|---------------|---------------|----------------|
-| `plumbing`    | Plumbing      | 8 pros         |
-| `electrical`  | Electrical    | 6 pros         |
-| `cleaning`    | Home Cleaning | 6 pros         |
-| `painting`    | Painting      | 5 pros         |
-| `hvac`        | HVAC          | 5 pros         |
-| `handyman`    | Handyman      | 6 pros         |
-
-Example: `service.html?type=electrical`
+Filters: All / Top Rated / Verified Only / Available Now
+Sort: Rating, Price (low/high), Most Jobs
 
 ## Tech Stack
 
-- Pure HTML, CSS, and vanilla JavaScript — no frameworks or build tools required
-- Google Fonts: **Fraunces** (display) + **Outfit** (body)
-- CSS custom properties for design tokens (colors, fonts, easing)
-- IntersectionObserver for scroll-reveal animations
+- **Vite 6** — build tool, dev server, HMR
+- **Vanilla JS (ES modules)** — no frameworks
+- **CSS modules per component** — imported directly in JS
+- **Client-side router** — `history.pushState` based SPA
+- Google Fonts: Fraunces + Outfit
 
-## Running Locally
-
-Open `index.html` in any modern browser — no server required.
+## Getting Started
 
 ```bash
-open index.html
-# or
-python3 -m http.server 8080
+npm install
+npm run dev      # dev server at http://localhost:5173
+npm run build    # production build → dist/
+npm run preview  # preview production build
 ```
-
-## Design
-
-- **Color palette:** Navy `#1B2E4A`, Blue `#3B82F6`, Ice `#F0F4F8`, Charcoal `#0F172A`
-- **Fully responsive** — adapts at 1024px and 768px breakpoints
-- Subtle noise texture overlay, glassmorphism navbar, animated logo dot
