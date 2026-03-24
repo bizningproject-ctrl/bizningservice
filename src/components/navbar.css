@@ -95,6 +95,13 @@ nav.scrolled {
 
 .nav-cta::after { display: none !important; }
 
+.nav-find {
+  color: var(--blue) !important;
+  font-weight: 600 !important;
+}
+
+.nav-find::after { background: var(--blue) !important; }
+
 .nav-back {
   text-decoration: none;
   color: var(--navy-light);

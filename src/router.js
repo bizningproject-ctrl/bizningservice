@@ -2,9 +2,11 @@ import { createNavbar, initNavbarBehavior } from './components/navbar.js';
 import { createFooter } from './components/footer.js';
 import { renderHome } from './pages/home.js';
 import { renderService } from './pages/service.js';
+import { renderFind } from './pages/find.js';
 
 const routes = {
   '/': { render: renderHome, navVariant: 'home', hasFooter: true },
+  '/find': { render: renderFind, navVariant: 'find', hasFooter: true },
   '/service': { render: renderService, navVariant: 'service', hasFooter: false },
   '/service.html': { render: renderService, navVariant: 'service', hasFooter: false },
 };
