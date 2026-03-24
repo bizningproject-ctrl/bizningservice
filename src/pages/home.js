@@ -162,7 +162,7 @@ export function renderHome(container) {
       <div class="testimonials-inner">
         <div class="section-header reveal">
           <span class="section-label">Real Stories</span>
-          <h2 class="section-title">Homeowners love<br>working with Handly</h2>
+          <h2 class="section-title">Homeowners love<br>working with handly.</h2>
         </div>
         <div class="testimonials-grid">
           ${testimonials.map(t => `

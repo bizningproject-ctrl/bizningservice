@@ -7,7 +7,7 @@ export function createFooter() {
       <div class="footer-brand">
         <a href="/" class="nav-logo">
           <span class="logo-dot"></span>
-          handly
+          handly.
         </a>
         <p>Connecting homeowners with trusted, verified professionals since 2023. Your home is in good hands.</p>
       </div>
@@ -44,7 +44,7 @@ export function createFooter() {
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Handly. All rights reserved.</p>
+      <p>&copy; 2026 handly. All rights reserved.</p>
       <div class="footer-social">
         <a href="#" aria-label="Twitter">&#120143;</a>
         <a href="#" aria-label="Instagram">&#9635;</a>

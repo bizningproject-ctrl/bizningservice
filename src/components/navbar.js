@@ -8,7 +8,7 @@ export function createNavbar({ variant = 'home' } = {}) {
     nav.innerHTML = `
       <a href="/" class="nav-logo">
         <span class="logo-dot"></span>
-        handly
+        handly.
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#services">Services</a></li>
@@ -27,7 +27,7 @@ export function createNavbar({ variant = 'home' } = {}) {
     nav.innerHTML = `
       <a href="/" class="nav-logo">
         <span class="logo-dot"></span>
-        handly
+        handly.
       </a>
       <a href="/" class="nav-back">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>

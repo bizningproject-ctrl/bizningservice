@@ -8,7 +8,7 @@ export function renderService(container) {
   const type = params.get('type') || 'plumbing';
   const service = serviceData[type] || serviceData.plumbing;
 
-  document.title = `Handly — ${service.title}`;
+  document.title = `handly. — ${service.title}`;
 
   container.innerHTML = `
     <div class="page-header">
