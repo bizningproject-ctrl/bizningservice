@@ -200,6 +200,12 @@ export function renderHome(container) {
 }
 
 function initHomeInteractions(container) {
+  // "Find a Pro" nav link → client-side navigate
+  document.querySelector('.nav-find')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigate('/find');
+  });
+
   // Hero tag clicks → navigate to service page
   container.querySelectorAll('.hero-tag, .service-card').forEach(el => {
     el.addEventListener('click', (e) => {

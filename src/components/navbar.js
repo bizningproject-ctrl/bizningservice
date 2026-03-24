@@ -15,13 +15,14 @@ export function createNavbar({ variant = 'home' } = {}) {
         <li><a href="#how">How It Works</a></li>
         <li><a href="#pros">Professionals</a></li>
         <li><a href="#reviews">Reviews</a></li>
+        <li><a href="/find" class="nav-find">Find a Pro</a></li>
         <li><a href="#" class="nav-cta">Become a Pro</a></li>
       </ul>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
     `;
-  } else {
+  } else if (variant === 'find') {
     nav.classList.add('nav-service');
     nav.innerHTML = `
       <a href="/" class="nav-logo">
@@ -31,6 +32,18 @@ export function createNavbar({ variant = 'home' } = {}) {
       <a href="/" class="nav-back">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
         Back to Home
+      </a>
+    `;
+  } else {
+    nav.classList.add('nav-service');
+    nav.innerHTML = `
+      <a href="/" class="nav-logo">
+        <span class="logo-dot"></span>
+        handly
+      </a>
+      <a href="/find" class="nav-back">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
+        All Services
       </a>
     `;
   }

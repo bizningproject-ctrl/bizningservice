@@ -1,6 +1,8 @@
 import './service.css';
 import { serviceData } from '../data/services.js';
 
+const PAGE_SIZE = 4;
+
 export function renderService(container) {
   const params = new URLSearchParams(window.location.search);
   const type = params.get('type') || 'plumbing';
@@ -29,12 +31,13 @@ export function renderService(container) {
     </div>
 
     <div class="pro-list" id="proList"></div>
+    <div class="pagination" id="pagination"></div>
   `;
 
   initServiceInteractions(container, service);
 }
 
-function renderPros(listEl, pros, service) {
+function renderPros(listEl, pros, service, page) {
   listEl.innerHTML = '';
 
   if (pros.length === 0) {
@@ -47,7 +50,10 @@ function renderPros(listEl, pros, service) {
     return;
   }
 
-  pros.forEach((pro, i) => {
+  const start = (page - 1) * PAGE_SIZE;
+  const pagePros = pros.slice(start, start + PAGE_SIZE);
+
+  pagePros.forEach((pro, i) => {
     const card = document.createElement('div');
     card.className = 'pro-item';
     card.style.animationDelay = `${i * 0.08}s`;
@@ -77,6 +83,36 @@ function renderPros(listEl, pros, service) {
   });
 }
 
+function renderPagination(paginationEl, pros, currentPage, onPageChange) {
+  const totalPages = Math.ceil(pros.length / PAGE_SIZE);
+
+  if (totalPages <= 1) {
+    paginationEl.innerHTML = '';
+    return;
+  }
+
+  const buttons = [];
+
+  buttons.push(`<button class="page-btn page-nav" data-page="1" ${currentPage === 1 ? 'disabled' : ''} aria-label="First page">&laquo;</button>`);
+  buttons.push(`<button class="page-btn page-nav" data-page="${currentPage - 1}" ${currentPage === 1 ? 'disabled' : ''} aria-label="Previous page">&lsaquo;</button>`);
+
+  for (let p = 1; p <= totalPages; p++) {
+    buttons.push(`<button class="page-btn ${p === currentPage ? 'active' : ''}" data-page="${p}">${p}</button>`);
+  }
+
+  buttons.push(`<button class="page-btn page-nav" data-page="${currentPage + 1}" ${currentPage === totalPages ? 'disabled' : ''} aria-label="Next page">&rsaquo;</button>`);
+  buttons.push(`<button class="page-btn page-nav" data-page="${totalPages}" ${currentPage === totalPages ? 'disabled' : ''} aria-label="Last page">&raquo;</button>`);
+
+  paginationEl.innerHTML = buttons.join('');
+
+  paginationEl.querySelectorAll('.page-btn:not([disabled])').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const page = parseInt(btn.dataset.page, 10);
+      if (page !== currentPage) onPageChange(page);
+    });
+  });
+}
+
 function getFiltered(pros, filter) {
   if (filter === 'top-rated') return pros.filter(p => p.rating >= 4.8);
   if (filter === 'verified') return pros.filter(p => p.verified);
@@ -95,12 +131,19 @@ function getSorted(pros, sort) {
 
 function initServiceInteractions(container, service) {
   const listEl = container.querySelector('#proList');
+  const paginationEl = container.querySelector('#pagination');
   const sortSelect = container.querySelector('#sortSelect');
   let activeFilter = 'all';
+  let currentPage = 1;
 
   const update = () => {
     const filtered = getSorted(getFiltered(service.pros, activeFilter), sortSelect.value);
-    renderPros(listEl, filtered, service);
+    renderPros(listEl, filtered, service, currentPage);
+    renderPagination(paginationEl, filtered, currentPage, (page) => {
+      currentPage = page;
+      update();
+      listEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   };
 
   update();
@@ -110,9 +153,13 @@ function initServiceInteractions(container, service) {
       container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       activeFilter = btn.dataset.filter;
+      currentPage = 1;
       update();
     });
   });
 
-  sortSelect.addEventListener('change', update);
+  sortSelect.addEventListener('change', () => {
+    currentPage = 1;
+    update();
+  });
 }
