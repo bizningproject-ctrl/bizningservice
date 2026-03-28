@@ -126,7 +126,7 @@ export const testimonials = [
     avatar: '\u{1F469}',
   },
   {
-    quote: '"We use Handly for bi-weekly cleaning now. Maria\'s team is thorough, punctual, and genuinely nice. Our home has never looked this good consistently."',
+    quote: '"We use Fixit for bi-weekly cleaning now. Maria\'s team is thorough, punctual, and genuinely nice. Our home has never looked this good consistently."',
     name: 'The Patel Family',
     context: 'Recurring cleaning \u2022 Austin, TX',
     avatar: '\u{1F46A}',

@@ -3,12 +3,21 @@ import { createFooter } from './components/footer.js';
 import { renderHome } from './pages/home.js';
 import { renderService } from './pages/service.js';
 import { renderFind } from './pages/find.js';
+import { renderBecomePro } from './pages/become-pro.js';
+import { renderApply } from './pages/apply.js';
+import { renderBook } from './pages/book.js';
+import { renderPro } from './pages/pro.js';
+import { setLang } from './i18n.js';
 
 const routes = {
   '/': { render: renderHome, navVariant: 'home', hasFooter: true },
   '/find': { render: renderFind, navVariant: 'find', hasFooter: true },
+  '/become-pro': { render: renderBecomePro, navVariant: 'find', hasFooter: true },
+  '/apply': { render: renderApply, navVariant: 'find', hasFooter: false },
+  '/book': { render: renderBook, navVariant: 'find', hasFooter: true },
   '/service': { render: renderService, navVariant: 'service', hasFooter: false },
   '/service.html': { render: renderService, navVariant: 'service', hasFooter: false },
+  '/pro': { render: renderPro, navVariant: 'service', hasFooter: false },
 };
 
 function getRoute() {
@@ -37,6 +46,11 @@ function mount(route) {
 
 export function navigate(href) {
   window.history.pushState({}, '', href);
+  mount(getRoute());
+}
+
+export function switchLang(lang) {
+  setLang(lang);
   mount(getRoute());
 }
 

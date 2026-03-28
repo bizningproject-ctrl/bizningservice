@@ -3,6 +3,7 @@ import { resolve } from 'path';
 
 export default defineConfig({
   root: '.',
+  appType: 'spa',
   build: {
     outDir: 'dist',
     rollupOptions: {

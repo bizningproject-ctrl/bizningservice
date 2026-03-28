@@ -1,6 +1,30 @@
 import './home.css';
 import { serviceData, featuredPros, testimonials } from '../data/services.js';
 import { navigate } from '../router.js';
+import { t } from '../i18n.js';
+
+const svcBreadcrumbKeys = {
+  plumbing: 'svc_plumbing', electrical: 'svc_electrical', cleaning: 'svc_cleaning',
+  painting: 'svc_painting', hvac: 'svc_hvac', handyman: 'svc_handyman',
+};
+
+const svcTagIcons = {
+  plumbing: `<svg class="hero-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>`,
+  electrical: `<svg class="hero-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+  cleaning: `<svg class="hero-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.09 3.36L16.36 6l-3.27 1.09L12 10.36 10.91 7.09 7.64 6l3.27-1.09z"/><path d="M18 10l.6 1.84L20.44 12.44l-1.84.6L18 14.88l-.6-1.84-1.84-.6 1.84-.6z"/><path d="M6 14l.6 1.84 1.84.6-1.84.6L6 18.88l-.6-1.84-1.84-.6 1.84-.6z"/></svg>`,
+  painting: `<svg class="hero-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="7" rx="2"/><path d="M12 10v4"/><rect x="9" y="14" width="6" height="7" rx="1"/></svg>`,
+  hvac: `<svg class="hero-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="8"/><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/><line x1="2" y1="12" x2="8" y2="12"/><line x1="4.93" y1="19.07" x2="9.17" y2="14.83"/><line x1="12" y1="22" x2="12" y2="16"/><line x1="19.07" y1="19.07" x2="14.83" y2="14.83"/><line x1="22" y1="12" x2="16" y2="12"/><line x1="19.07" y1="4.93" x2="14.83" y2="9.17"/></svg>`,
+  handyman: `<svg class="hero-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 12l-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15L22 10.64"/><path d="M20.91 11.7l-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></svg>`,
+};
+const svcShortKeys = {
+  plumbing: 'svc_plumbing_short', electrical: 'svc_electrical_short', cleaning: 'svc_cleaning_short',
+  painting: 'svc_painting_short', hvac: 'svc_hvac_short', handyman: 'svc_handyman_short',
+};
+const testimonialKeys = [
+  { quote: 'testimonial1', ctx: 'testimonial1_ctx' },
+  { quote: 'testimonial2', ctx: 'testimonial2_ctx' },
+  { quote: 'testimonial3', ctx: 'testimonial3_ctx' },
+];
 
 export function renderHome(container) {
   container.innerHTML = `
@@ -14,68 +38,72 @@ export function renderHome(container) {
         <div class="hero-text">
           <div class="hero-badge">
             <span class="badge-dot"></span>
-            Trusted by 20,000+ homeowners
+            ${t('hero_badge')}
           </div>
-          <h1>Your home<br>deserves <span class="text-blue">the best</span> hands</h1>
-          <p class="hero-subtitle">Connect with verified plumbers, electricians, and cleaners in your neighborhood. Transparent pricing, real reviews, and guaranteed satisfaction.</p>
+          <h1>${t('hero_title_1')}<br>${t('hero_title_2')} <span class="text-blue">${t('hero_title_3')}</span> ${t('hero_title_4')}</h1>
+          <p class="hero-subtitle">${t('hero_subtitle')}</p>
 
           <div class="search-box">
             <span class="search-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
             </span>
-            <input type="text" placeholder="What service do you need?" id="searchInput">
-            <button id="searchBtn">Search</button>
+            <input type="text" placeholder="${t('hero_search_placeholder')}" id="searchInput">
+            <button id="searchBtn">${t('hero_search_btn')}</button>
           </div>
 
           <div class="hero-tags">
-            ${Object.entries(serviceData).map(([key, s]) => `
-              <a href="#" class="hero-tag" data-service="${key}">${s.breadcrumb}</a>
+            ${Object.entries(serviceData).map(([key]) => `
+              <a href="#" class="hero-tag" data-service="${key}">
+                ${svcTagIcons[key] || ''}
+                <span>${t(svcBreadcrumbKeys[key])}</span>
+              </a>
             `).join('')}
           </div>
+
         </div>
 
         <div class="hero-visual">
           <div class="hero-card-stack">
-            <div class="floating-badge badge-verified">&#10003; Verified Pro</div>
-            <div class="floating-badge badge-online">&#9679; 12 online now</div>
+            <div class="floating-badge badge-verified">${t('hero_verified')}</div>
+            <div class="floating-badge badge-online">${t('hero_online')}</div>
 
             <div class="pro-card">
               <div class="pro-avatar" style="background: linear-gradient(135deg, #1B2E4A, #2D4A6F)">&#128295;</div>
               <div class="pro-info">
                 <h4>Marcus Rivera</h4>
-                <div class="pro-role">Master Plumber &bull; 12yr exp</div>
+                <div class="pro-role">${t('hero_master_plumber')}</div>
                 <div class="pro-meta">
                   <span class="pro-rating">&#9733; 4.9</span>
-                  <span class="pro-jobs">847 jobs</span>
+                  <span class="pro-jobs">847 ${t('featured_jobs')}</span>
                 </div>
               </div>
-              <div class="pro-price"><span class="amount">$65</span><span class="unit">/hour</span></div>
+              <div class="pro-price"><span class="amount">$65</span><span class="unit">${t('service_hour')}</span></div>
             </div>
 
             <div class="pro-card">
               <div class="pro-avatar" style="background: linear-gradient(135deg, #3B82F6, #60A5FA)">&#9889;</div>
               <div class="pro-info">
                 <h4>Sarah Chen</h4>
-                <div class="pro-role">Electrician &bull; 8yr exp</div>
+                <div class="pro-role">${t('hero_electrician')}</div>
                 <div class="pro-meta">
                   <span class="pro-rating">&#9733; 4.8</span>
-                  <span class="pro-jobs">623 jobs</span>
+                  <span class="pro-jobs">623 ${t('featured_jobs')}</span>
                 </div>
               </div>
-              <div class="pro-price"><span class="amount">$70</span><span class="unit">/hour</span></div>
+              <div class="pro-price"><span class="amount">$70</span><span class="unit">${t('service_hour')}</span></div>
             </div>
 
             <div class="pro-card">
               <div class="pro-avatar" style="background: linear-gradient(135deg, #2563EB, #4F86E7)">&#10024;</div>
               <div class="pro-info">
                 <h4>Ana Kowalski</h4>
-                <div class="pro-role">Home Cleaner &bull; 5yr exp</div>
+                <div class="pro-role">${t('hero_cleaner')}</div>
                 <div class="pro-meta">
                   <span class="pro-rating">&#9733; 5.0</span>
-                  <span class="pro-jobs">1,204 jobs</span>
+                  <span class="pro-jobs">1,204 ${t('featured_jobs')}</span>
                 </div>
               </div>
-              <div class="pro-price"><span class="amount">$45</span><span class="unit">/hour</span></div>
+              <div class="pro-price"><span class="amount">$45</span><span class="unit">${t('service_hour')}</span></div>
             </div>
           </div>
         </div>
@@ -85,19 +113,23 @@ export function renderHome(container) {
     <!-- SERVICES -->
     <section class="services" id="services">
       <div class="section-header reveal">
-        <span class="section-label">What We Offer</span>
-        <h2 class="section-title">Every service your<br>home needs</h2>
-        <p class="section-subtitle">From leaky faucets to full rewiring, our network of certified professionals has you covered.</p>
+        <span class="section-label">${t('services_label')}</span>
+        <h2 class="section-title">${t('services_title')}</h2>
+        <p class="section-subtitle">${t('services_subtitle')}</p>
       </div>
       <div class="services-grid">
-        ${Object.entries(serviceData).map(([key, s]) => `
-          <a href="#" class="service-card reveal" data-service="${key}">
+        ${Object.entries(serviceData).map(([key, s]) => {
+          const isSoon = key === 'painting';
+          return `
+          <div class="service-card reveal${isSoon ? ' service-card--soon' : ''}" data-service="${isSoon ? '' : key}">
+            ${isSoon ? `<span class="soon-badge">${t('services_soon')}</span>` : ''}
             <div class="service-icon">${s.icon}</div>
-            <h3>${s.breadcrumb}</h3>
-            <p>${s.shortDesc}</p>
-            <span class="service-count">&#128100; ${s.count} pros available</span>
-          </a>
-        `).join('')}
+            <h3>${t(svcBreadcrumbKeys[key])}</h3>
+            <p>${t(svcShortKeys[key])}</p>
+            <span class="service-count">&#128100; ${s.count} ${t('services_pros_available')}</span>
+          </div>
+        `;
+        }).join('')}
       </div>
     </section>
 
@@ -105,25 +137,25 @@ export function renderHome(container) {
     <section class="how-it-works" id="how">
       <div class="how-inner">
         <div class="section-header reveal">
-          <span class="section-label">Simple Process</span>
-          <h2 class="section-title">Booked in three<br>easy steps</h2>
-          <p class="section-subtitle">No phone tag, no waiting around. Get matched with a pro and confirm your appointment in minutes.</p>
+          <span class="section-label">${t('how_label')}</span>
+          <h2 class="section-title">${t('how_title')}</h2>
+          <p class="section-subtitle">${t('how_subtitle')}</p>
         </div>
         <div class="steps-grid">
           <div class="step-card reveal">
             <div class="step-number">01</div>
-            <h3>Describe your need</h3>
-            <p>Tell us what you need done, when you need it, and share any photos. The more detail, the better your match.</p>
+            <h3>${t('how_step1_title')}</h3>
+            <p>${t('how_step1_desc')}</p>
           </div>
           <div class="step-card reveal">
             <div class="step-number">02</div>
-            <h3>Get matched instantly</h3>
-            <p>We surface the best-fit professionals in your area based on skill, rating, availability, and price.</p>
+            <h3>${t('how_step2_title')}</h3>
+            <p>${t('how_step2_desc')}</p>
           </div>
           <div class="step-card reveal">
             <div class="step-number">03</div>
-            <h3>Book &amp; relax</h3>
-            <p>Confirm your pro, lock in the price, and track the job from start to finish. Pay securely when you're satisfied.</p>
+            <h3>${t('how_step3_title')}</h3>
+            <p>${t('how_step3_desc')}</p>
           </div>
         </div>
       </div>
@@ -132,24 +164,24 @@ export function renderHome(container) {
     <!-- FEATURED PROS -->
     <section class="featured" id="pros">
       <div class="section-header reveal">
-        <span class="section-label">Top Rated</span>
-        <h2 class="section-title">Meet our highest-rated<br>professionals</h2>
-        <p class="section-subtitle">These pros consistently deliver five-star service and have earned the trust of hundreds of homeowners.</p>
+        <span class="section-label">${t('featured_label')}</span>
+        <h2 class="section-title">${t('featured_title')}</h2>
+        <p class="section-subtitle">${t('featured_subtitle')}</p>
       </div>
       <div class="pros-grid">
         ${featuredPros.map(pro => `
           <div class="featured-pro reveal">
             <div class="featured-pro-img" style="background: ${pro.gradient}">
               ${pro.icon}
-              <span class="featured-pro-verified">&#10003; Verified</span>
+              <span class="featured-pro-verified">${t('featured_verified')}</span>
             </div>
             <div class="featured-pro-body">
               <h4>${pro.name}</h4>
               <div class="pro-specialty">${pro.specialty}</div>
               <div class="featured-pro-stats">
                 <span class="stat"><span class="stat-rating">&#9733; ${pro.rating}</span></span>
-                <span class="stat"><strong>${pro.jobs.toLocaleString()}</strong> jobs</span>
-                <span class="stat"><strong>$${pro.price}</strong>/hr</span>
+                <span class="stat"><strong>${pro.jobs.toLocaleString()}</strong> ${t('featured_jobs')}</span>
+                <span class="stat"><strong>$${pro.price}</strong>${t('featured_hr')}</span>
               </div>
             </div>
           </div>
@@ -161,19 +193,19 @@ export function renderHome(container) {
     <section class="testimonials" id="reviews">
       <div class="testimonials-inner">
         <div class="section-header reveal">
-          <span class="section-label">Real Stories</span>
-          <h2 class="section-title">Homeowners love<br>working with Handly</h2>
+          <span class="section-label">${t('testimonials_label')}</span>
+          <h2 class="section-title">${t('testimonials_title')}</h2>
         </div>
         <div class="testimonials-grid">
-          ${testimonials.map(t => `
+          ${testimonials.map((tm, i) => `
             <div class="testimonial-card reveal">
               <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-              <blockquote>${t.quote}</blockquote>
+              <blockquote>${t(testimonialKeys[i].quote)}</blockquote>
               <div class="testimonial-author">
-                <div class="testimonial-avatar">${t.avatar}</div>
+                <div class="testimonial-avatar">${tm.avatar}</div>
                 <div class="testimonial-author-info">
-                  <h5>${t.name}</h5>
-                  <span>${t.context}</span>
+                  <h5>${tm.name}</h5>
+                  <span>${t(testimonialKeys[i].ctx)}</span>
                 </div>
               </div>
             </div>
@@ -185,11 +217,11 @@ export function renderHome(container) {
     <!-- CTA -->
     <section class="cta-section">
       <div class="cta-box reveal">
-        <h2>Ready to find your<br>perfect pro?</h2>
-        <p>Join thousands of homeowners who've made home maintenance effortless.</p>
+        <h2>${t('cta_title')}</h2>
+        <p>${t('cta_subtitle')}</p>
         <div class="cta-buttons">
-          <button class="btn-primary" id="ctaSearch">Find a Professional</button>
-          <a href="#" class="btn-secondary">Join as a Pro</a>
+          <button class="btn-primary" id="ctaSearch">${t('cta_find')}</button>
+          <a href="/become-pro" class="btn-secondary" id="ctaBecomePro">${t('cta_join')}</a>
         </div>
       </div>
     </section>
@@ -200,13 +232,21 @@ export function renderHome(container) {
 }
 
 function initHomeInteractions(container) {
-  // "Find a Pro" nav link → client-side navigate
   document.querySelector('.nav-find')?.addEventListener('click', (e) => {
     e.preventDefault();
     navigate('/find');
   });
 
-  // Hero tag clicks → navigate to service page
+  document.querySelector('.nav-cta')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigate('/become-pro');
+  });
+
+  container.querySelector('#ctaBecomePro')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    navigate('/become-pro');
+  });
+
   container.querySelectorAll('.hero-tag, .service-card').forEach(el => {
     el.addEventListener('click', (e) => {
       e.preventDefault();
@@ -215,7 +255,6 @@ function initHomeInteractions(container) {
     });
   });
 
-  // Search
   const searchInput = container.querySelector('#searchInput');
   const searchBtn = container.querySelector('#searchBtn');
 
@@ -236,7 +275,6 @@ function initHomeInteractions(container) {
   searchBtn?.addEventListener('click', doSearch);
   searchInput?.addEventListener('keypress', (e) => { if (e.key === 'Enter') doSearch(); });
 
-  // CTA → scroll to top & focus search
   container.querySelector('#ctaSearch')?.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setTimeout(() => searchInput?.focus(), 800);
@@ -255,7 +293,6 @@ export function initScrollReveal() {
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  // Stagger grid children
   document.querySelectorAll('.services-grid, .steps-grid, .pros-grid, .testimonials-grid').forEach(grid => {
     const gridObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {

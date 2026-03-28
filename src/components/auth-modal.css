@@ -1,0 +1,144 @@
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: authFadeIn 0.2s ease forwards;
+}
+
+@keyframes authFadeIn {
+  to { opacity: 1; }
+}
+
+.auth-modal {
+  background: var(--card-bg, #fff);
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 420px;
+  padding: 2rem;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  transform: translateY(20px);
+  animation: authSlideUp 0.3s ease forwards;
+}
+
+@keyframes authSlideUp {
+  to { transform: translateY(0); }
+}
+
+.auth-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-secondary, #64748b);
+  line-height: 1;
+  padding: 0.25rem;
+}
+
+.auth-close:hover {
+  color: var(--text-primary, #0f172a);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.auth-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary, #0f172a);
+  margin: 0 0 0.25rem;
+}
+
+.auth-header p {
+  color: var(--text-secondary, #64748b);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.auth-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.auth-form label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary, #0f172a);
+  margin-bottom: 0.35rem;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1.5px solid var(--border, #e2e8f0);
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  background: var(--input-bg, #fff);
+  color: var(--text-primary, #0f172a);
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.auth-error {
+  color: #ef4444;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+  display: none;
+}
+
+.auth-submit {
+  width: 100%;
+  padding: 0.8rem;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.auth-submit:hover {
+  opacity: 0.9;
+}
+
+.auth-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.auth-switch {
+  text-align: center;
+  margin-top: 1.25rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary, #64748b);
+}
+
+.auth-switch a {
+  color: #6366f1;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}

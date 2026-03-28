@@ -1,4 +1,4 @@
-# Handly — Find Trusted Home Pros
+# Fixit — Find Trusted Home Pros
 
 A home services marketplace built with **Vite** and vanilla JavaScript.
 

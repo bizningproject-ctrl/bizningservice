@@ -1,4 +1,5 @@
 import './footer.css';
+import { t } from '../i18n.js';
 
 export function createFooter() {
   const footer = document.createElement('footer');
@@ -7,44 +8,44 @@ export function createFooter() {
       <div class="footer-brand">
         <a href="/" class="nav-logo">
           <span class="logo-dot"></span>
-          handly
+          fixit
         </a>
-        <p>Connecting homeowners with trusted, verified professionals since 2023. Your home is in good hands.</p>
+        <p>${t('footer_desc')}</p>
       </div>
       <div class="footer-col">
-        <h5>Services</h5>
+        <h5>${t('footer_services')}</h5>
         <ul>
-          <li><a href="/service?type=plumbing">Plumbing</a></li>
-          <li><a href="/service?type=electrical">Electrical</a></li>
-          <li><a href="/service?type=cleaning">Cleaning</a></li>
-          <li><a href="/service?type=painting">Painting</a></li>
-          <li><a href="/service?type=hvac">HVAC</a></li>
-          <li><a href="/service?type=handyman">Handyman</a></li>
+          <li><a href="/service?type=plumbing">${t('svc_plumbing')}</a></li>
+          <li><a href="/service?type=electrical">${t('svc_electrical')}</a></li>
+          <li><a href="/service?type=cleaning">${t('svc_cleaning')}</a></li>
+          <li><a href="/service?type=painting">${t('svc_painting')}</a></li>
+          <li><a href="/service?type=hvac">${t('svc_hvac')}</a></li>
+          <li><a href="/service?type=handyman">${t('svc_handyman')}</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Company</h5>
+        <h5>${t('footer_company')}</h5>
         <ul>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">How It Works</a></li>
-          <li><a href="#">Careers</a></li>
-          <li><a href="#">Press</a></li>
-          <li><a href="#">Blog</a></li>
+          <li><a href="#">${t('footer_about')}</a></li>
+          <li><a href="#">${t('footer_how')}</a></li>
+          <li><a href="#">${t('footer_careers')}</a></li>
+          <li><a href="#">${t('footer_press')}</a></li>
+          <li><a href="#">${t('footer_blog')}</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Support</h5>
+        <h5>${t('footer_support')}</h5>
         <ul>
-          <li><a href="#">Help Center</a></li>
-          <li><a href="#">Safety</a></li>
-          <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="#">${t('footer_help')}</a></li>
+          <li><a href="#">${t('footer_safety')}</a></li>
+          <li><a href="#">${t('footer_terms')}</a></li>
+          <li><a href="#">${t('footer_privacy')}</a></li>
+          <li><a href="#">${t('footer_contact')}</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Handly. All rights reserved.</p>
+      <p>${t('footer_rights')}</p>
       <div class="footer-social">
         <a href="#" aria-label="Twitter">&#120143;</a>
         <a href="#" aria-label="Instagram">&#9635;</a>
