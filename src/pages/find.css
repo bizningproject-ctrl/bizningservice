@@ -1,0 +1,211 @@
+/* ── FIND HERO ── */
+.find-hero {
+  background: linear-gradient(160deg, #f0f6ff 0%, #e8f0fe 100%);
+  padding: 5rem 3rem 3.5rem;
+  text-align: center;
+}
+
+.find-hero-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.find-label {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: rgba(59, 130, 246, 0.1);
+  padding: 0.3rem 0.9rem;
+  border-radius: 100px;
+  margin-bottom: 1.2rem;
+}
+
+.find-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  color: var(--navy);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 0.8rem;
+}
+
+.find-subtitle {
+  font-size: 1.05rem;
+  color: var(--navy-light);
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+
+/* ── SEARCH ── */
+.find-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 520px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1.5px solid rgba(27, 46, 74, 0.12);
+  border-radius: 16px;
+  padding: 0 1rem;
+  box-shadow: 0 4px 20px rgba(27, 46, 74, 0.07);
+  transition: box-shadow 0.3s var(--ease-out-expo), border-color 0.3s;
+}
+
+.find-search-wrap:focus-within {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.find-search-icon {
+  color: var(--slate);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: 0.6rem;
+}
+
+.find-search-wrap input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--navy);
+  padding: 0.9rem 0;
+}
+
+.find-search-wrap input::placeholder { color: var(--slate); }
+
+.find-clear {
+  background: none;
+  border: none;
+  color: var(--slate);
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  padding: 0.2rem;
+  border-radius: 50%;
+  transition: color 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+
+.find-clear:hover { color: var(--navy); background: rgba(27, 46, 74, 0.06); }
+
+/* ── BODY ── */
+.find-body {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2.5rem 3rem 5rem;
+}
+
+.find-results-info {
+  font-size: 0.82rem;
+  color: var(--slate);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+/* ── GRID ── */
+.find-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.find-card {
+  background: var(--white);
+  border: 1.5px solid rgba(27, 46, 74, 0.06);
+  border-radius: 20px;
+  padding: 1.75rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.4s var(--ease-out-expo);
+  animation: fadeIn 0.5s var(--ease-out-expo) both;
+}
+
+.find-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(27, 46, 74, 0.1);
+  border-color: var(--blue);
+}
+
+.find-card-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.find-card-body h3 {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--charcoal);
+  margin-bottom: 0.4rem;
+}
+
+.find-card-body p {
+  font-size: 0.83rem;
+  color: var(--navy-light);
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.find-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(27, 46, 74, 0.06);
+  margin-top: auto;
+}
+
+.find-card-count {
+  font-size: 0.78rem;
+  color: var(--slate);
+  font-weight: 500;
+}
+
+.find-card-cta {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--blue);
+  transition: gap 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.find-card:hover .find-card-cta { gap: 0.5rem; }
+
+/* ── EMPTY STATE ── */
+.find-empty {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.find-empty-icon { font-size: 3rem; margin-bottom: 1rem; }
+.find-empty h3 { font-family: var(--font-display); font-size: 1.5rem; color: var(--navy); margin-bottom: 0.5rem; }
+.find-empty p { color: var(--slate); font-weight: 300; }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+  .find-hero { padding: 4rem 1.5rem 2.5rem; }
+  .find-body { padding: 2rem 1.5rem 4rem; }
+  .find-grid { grid-template-columns: 1fr; }
+}
