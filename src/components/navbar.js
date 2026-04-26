@@ -55,6 +55,17 @@ function themeToggleHTML() {
   `;
 }
 
+const LOGO_MARK = `
+  <svg class="nav-logo-mark" width="40" height="32" viewBox="0 0 40 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="0" y="0" width="4.5" height="32" rx="2.25" fill="#1B2E4A"/>
+    <rect x="12" y="0" width="4.5" height="32" rx="2.25" fill="#1B2E4A"/>
+    <rect x="0" y="13.75" width="16.5" height="4.5" rx="2.25" fill="#1B2E4A"/>
+    <path d="M23 7C23 4.2 25.5 2 29 2C32.5 2 35 4.2 35.5 7C36.2 10.2 33.5 12.2 30.5 14C27.5 15.8 24 17.8 24 21.5C24 25.2 27 29 31 29C35 29 37.5 26.5 38 23.5" stroke="#3B82F6" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+    <circle cx="29.5" cy="16.5" r="2.4" fill="#0EA5E9"/>
+    <circle cx="32.5" cy="17.4" r="2.4" fill="#0EA5E9"/>
+  </svg>
+`;
+
 export function createNavbar({ variant = 'home' } = {}) {
   const nav = document.createElement('nav');
   nav.id = 'navbar';
@@ -62,8 +73,8 @@ export function createNavbar({ variant = 'home' } = {}) {
   if (variant === 'home') {
     nav.innerHTML = `
       <a href="/" class="nav-logo">
-        <span class="logo-dot"></span>
-        fixit
+        ${LOGO_MARK}
+        <span class="nav-logo-text">fixit</span>
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#services">${t('nav_services')}</a></li>
@@ -94,8 +105,8 @@ export function createNavbar({ variant = 'home' } = {}) {
       </a>
       <div class="nav-service-right">
         <a href="/" class="nav-logo nav-logo-sm">
-          <span class="logo-dot"></span>
-          fixit
+          ${LOGO_MARK}
+          <span class="nav-logo-text">fixit</span>
         </a>
         ${authHTML()}
         ${themeToggleHTML()}
@@ -111,8 +122,8 @@ export function createNavbar({ variant = 'home' } = {}) {
       </a>
       <div class="nav-service-right">
         <a href="/" class="nav-logo nav-logo-sm">
-          <span class="logo-dot"></span>
-          fixit
+          ${LOGO_MARK}
+          <span class="nav-logo-text">fixit</span>
         </a>
         ${authHTML()}
         ${themeToggleHTML()}
